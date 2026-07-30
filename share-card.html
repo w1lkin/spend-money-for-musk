@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>替马斯克花钱 · 分享卡片</title>
+<style>
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    text-align: center; padding: 40px 16px;
+    background: #f5f3ef;
+  }
+  canvas { border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.1); max-width: 90vw; }
+  button {
+    margin-top: 20px; padding: 14px 40px; font-size: 17px;
+    background: #7a6e5d; color: white; border: none; border-radius: 8px;
+    cursor: pointer; font-weight: 600;
+  }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  p { color: #999; margin-top: 12px; font-size: 14px; }
+</style>
+</head>
+<body>
+<h2>替马斯克花钱 分享卡片</h2>
+<canvas id="c"></canvas>
+<p>点击下载 PNG，可作为 og:image 使用</p>
+<button id="dl-btn" onclick="downloadPNG()" disabled>加载中…</button>
+<script>
+const CONFIG = {
+  url: "https://spend-money-for-musk.pages.dev/",
+  title: "替马斯克花钱",
+  subtitle: "替马斯克花掉亿万身家，解锁搞怪称号",
+  features: ["💰 实时身价 · 疯狂剁手", "🏪 12种品类 · 50+商品", "🏆 21个成就 · 15个称号", "📸 生成分享海报 · 炫耀战绩"],
+  primaryColor: "#7a6e5d"
+};
+
+const W = 1200, H = 1600;
+const canvas = document.getElementById("c");
+canvas.width = W; canvas.height = H;
+const ctx = canvas.getContext("2d");
+
+function rr(x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y);
+  ctx.arcTo(x + w, y, x + w, y + r, r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.arcTo(x + w, y + h, x + w - r, y + h, r);
+  ctx.lineTo(x + r, y + h);
+  ctx.arcTo(x, y + h, x, y + h - r, r);
+  ctx.lineTo(x, y + r); ctx.arcTo(x, y, x + r, y, r);
+  ctx.closePath();
+}
+
+function draw(qrImg) {
+  const c = CONFIG;
+
+  ctx.fillStyle = '#f5f3ef';
+  ctx.fillRect(0, 0, W, H);
+
+  // 顶部装饰线
+  ctx.strokeStyle = c.primaryColor;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(120, 80);
+  ctx.lineTo(W - 120, 80);
+  ctx.stroke();
+
+  // 标题
+  ctx.fillStyle = '#4a4a4a';
+  ctx.font = 'bold 72px -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(c.title, W / 2, 240);
+
+  // 表情行
+  ctx.font = '64px sans-serif';
+  ctx.fillText('💰 🚀 🏝️ 💎 🛒', W / 2, 340);
+
+  // 副标题
+  ctx.fillStyle = '#999';
+  ctx.font = '38px -apple-system, "PingFang SC", sans-serif';
+  ctx.fillText(c.subtitle, W / 2, 440);
+
+  // 虚线分隔
+  ctx.strokeStyle = '#ccc';
+  ctx.lineWidth = 2;
+  ctx.setLineDash([14, 10]);
+  ctx.beginPath();
+  ctx.moveTo(140, 530);
+  ctx.lineTo(W - 140, 530);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // 特性列表
+  ctx.fillStyle = '#666';
+  ctx.font = '36px -apple-system, "PingFang SC", sans-serif';
+  c.features.forEach((f, i) => ctx.fillText(f, W / 2, 630 + i * 88));
+
+  // 二维码
+  if (qrImg) {
+    const qs = 260, qx = (W - qs) / 2, qy = H - 400;
+    ctx.fillStyle = '#fff';
+    rr(ctx, qx - 24, qy - 24, qs + 48, qs + 48, 32);
+    ctx.fill();
+    ctx.strokeStyle = c.primaryColor;
+    ctx.lineWidth = 2;
+    rr(ctx, qx - 24, qy - 24, qs + 48, qs + 48, 32);
+    ctx.stroke();
+    ctx.drawImage(qrImg, qx, qy, qs, qs);
+  }
+
+  // 底部引导
+  ctx.fillStyle = '#aaa';
+  ctx.font = '26px -apple-system, "PingFang SC", sans-serif';
+  ctx.fillText('扫码或长按识别 · 和朋友一起玩', W / 2, H - 36);
+
+  document.getElementById("dl-btn").disabled = false;
+  document.getElementById("dl-btn").textContent = "下载 PNG";
+}
+
+const qr = new Image();
+qr.crossOrigin = "anonymous";
+qr.onload = () => draw(qr);
+qr.onerror = () => {
+  document.getElementById("dl-btn").disabled = false;
+  document.getElementById("dl-btn").textContent = "下载 PNG (无二维码)";
+  draw(null);
+};
+qr.src = "https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=" + encodeURIComponent(CONFIG.url) + "&margin=8";
+
+function downloadPNG() {
+  const a = document.createElement("a");
+  a.download = "spend-money-for-musk-share.png";
+  a.href = canvas.toDataURL("image/png");
+  a.click();
+}
+</script>
+</body>
+</html>

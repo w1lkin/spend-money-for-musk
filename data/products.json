@@ -1,0 +1,95 @@
+{
+  "categories": [
+    { "id": "coffee", "name": "咖啡奶茶", "emoji": "☕" },
+    { "id": "grocery", "name": "日用百货", "emoji": "🛒" },
+    { "id": "clothing", "name": "服饰穿搭", "emoji": "👔" },
+    { "id": "food", "name": "快餐小吃", "emoji": "🍔" },
+    { "id": "digital", "name": "数码产品", "emoji": "📱" },
+    { "id": "vehicle", "name": "出行座驾", "emoji": "🚗" },
+    { "id": "property", "name": "房产置业", "emoji": "🏠" },
+    { "id": "entertain", "name": "娱乐消遣", "emoji": "🎮" },
+    { "id": "gift", "name": "送礼请客", "emoji": "🎁" },
+    { "id": "travel", "name": "旅行度假", "emoji": "✈️" },
+    { "id": "invest", "name": "投资理财", "emoji": "💼" },
+    { "id": "absurd", "name": "任性消费", "emoji": "🤪" }
+  ],
+  "products": [
+    { "id": "coffee-1", "name": "美式咖啡", "category": "coffee", "price": 4.5, "emoji": "☕", "description": "提神醒脑必备", "stock": -1 },
+    { "id": "coffee-2", "name": "拿铁", "category": "coffee", "price": 5.75, "emoji": "🥛", "description": "加奶更丝滑", "stock": -1 },
+    { "id": "coffee-3", "name": "抹茶星冰乐", "category": "coffee", "price": 7.5, "emoji": "🍵", "description": "夏天的味道", "stock": -1 },
+    { "id": "coffee-4", "name": "珍珠奶茶", "category": "coffee", "price": 3.5, "emoji": "🧋", "description": "QQ弹弹", "stock": -1 },
+    { "id": "coffee-5", "name": "椰子水", "category": "coffee", "price": 2, "emoji": "🥥", "description": "天然电解质", "stock": -1 },
+    { "id": "coffee-6", "name": "精酿啤酒", "category": "coffee", "price": 8, "emoji": "🍺", "description": "下班来一杯", "stock": -1 },
+
+    { "id": "grocery-1", "name": "厕纸(12卷)", "category": "grocery", "price": 6.99, "emoji": "🧻", "description": "刚需中的刚需", "stock": -1 },
+    { "id": "grocery-2", "name": "洗衣液(3L)", "category": "grocery", "price": 12, "emoji": "🧴", "description": "薰衣草香味", "stock": -1 },
+    { "id": "grocery-3", "name": "牙膏", "category": "grocery", "price": 4.5, "emoji": "🪥", "description": "薄荷清新", "stock": -1 },
+    { "id": "grocery-4", "name": "垃圾袋(100只)", "category": "grocery", "price": 5, "emoji": "🗑️", "description": "加厚不易破", "stock": -1 },
+    { "id": "grocery-5", "name": "电池(20节)", "category": "grocery", "price": 8, "emoji": "🔋", "description": "遥控器专用", "stock": -1 },
+    { "id": "grocery-6", "name": "矿泉水(24瓶)", "category": "grocery", "price": 9.99, "emoji": "💧", "description": "居家必备", "stock": -1 },
+
+    { "id": "clothing-1", "name": "白T恤", "category": "clothing", "price": 15, "emoji": "👕", "description": "百搭基础款", "stock": -1 },
+    { "id": "clothing-2", "name": "牛仔裤", "category": "clothing", "price": 49, "emoji": "👖", "description": "经典直筒", "stock": -1 },
+    { "id": "clothing-3", "name": "运动鞋", "category": "clothing", "price": 89, "emoji": "👟", "description": "轻便透气", "stock": -1 },
+    { "id": "clothing-4", "name": "羽绒服", "category": "clothing", "price": 199, "emoji": "🧥", "description": "寒冬必备", "stock": -1 },
+    { "id": "clothing-5", "name": "太阳镜", "category": "clothing", "price": 25, "emoji": "🕶️", "description": "开车防晒两不误", "stock": -1 },
+
+    { "id": "food-1", "name": "汉堡套餐", "category": "food", "price": 12, "emoji": "🍔", "description": "经典巨无霸", "stock": -1 },
+    { "id": "food-2", "name": "披萨(12寸)", "category": "food", "price": 18, "emoji": "🍕", "description": "意式薄底", "stock": -1 },
+    { "id": "food-3", "name": "寿司拼盘", "category": "food", "price": 35, "emoji": "🍣", "description": "新鲜刺身", "stock": -1 },
+    { "id": "food-4", "name": "火锅双人餐", "category": "food", "price": 60, "emoji": "🍲", "description": "麻辣鲜香", "stock": -1 },
+    { "id": "food-5", "name": "冰淇淋", "category": "food", "price": 3, "emoji": "🍦", "description": "夏日消暑", "stock": -1 },
+    { "id": "food-6", "name": "烤串(10串)", "category": "food", "price": 15, "emoji": "🍢", "description": "深夜食堂", "stock": -1 },
+
+    { "id": "digital-1", "name": "手机壳", "category": "digital", "price": 15, "emoji": "📱", "description": "防摔硅胶", "stock": -1 },
+    { "id": "digital-2", "name": "蓝牙耳机", "category": "digital", "price": 79, "emoji": "🎧", "description": "降噪续航强", "stock": -1 },
+    { "id": "digital-3", "name": "机械键盘", "category": "digital", "price": 120, "emoji": "⌨️", "description": "青轴咔咔响", "stock": -1 },
+    { "id": "digital-4", "name": "显示器(27寸)", "category": "digital", "price": 299, "emoji": "🖥️", "description": "4K高清", "stock": -1 },
+    { "id": "digital-5", "name": "游戏机", "category": "digital", "price": 499, "emoji": "🎮", "description": "次世代主机", "stock": -1 },
+    { "id": "digital-6", "name": "智能手表", "category": "digital", "price": 399, "emoji": "⌚", "description": "健康监测", "stock": -1 },
+
+    { "id": "vehicle-1", "name": "自行车", "category": "vehicle", "price": 300, "emoji": "🚲", "description": "城市通勤", "stock": -1 },
+    { "id": "vehicle-2", "name": "电动车", "category": "vehicle", "price": 1500, "emoji": "🛵", "description": "买菜接娃神器", "stock": -1 },
+    { "id": "vehicle-3", "name": "摩托车", "category": "vehicle", "price": 8000, "emoji": "🏍️", "description": "追风少年", "stock": -1 },
+    { "id": "vehicle-4", "name": "经济轿车", "category": "vehicle", "price": 25000, "emoji": "🚗", "description": "省油代步", "stock": -1 },
+    { "id": "vehicle-5", "name": "SUV越野车", "category": "vehicle", "price": 45000, "emoji": "🚙", "description": "全家出游", "stock": -1 },
+
+    { "id": "property-1", "name": "单身公寓", "category": "property", "price": 200000, "emoji": "🏢", "description": "麻雀虽小五脏俱全", "stock": -1 },
+    { "id": "property-2", "name": "两室一厅", "category": "property", "price": 500000, "emoji": "🏡", "description": "温馨小家", "stock": -1 },
+    { "id": "property-3", "name": "别墅", "category": "property", "price": 2000000, "emoji": "🏠", "description": "带花园和泳池", "stock": -1 },
+    { "id": "property-4", "name": "海景度假屋", "category": "property", "price": 5000000, "emoji": "🏖️", "description": "面朝大海", "stock": -1 },
+    { "id": "property-5", "name": "顶层复式", "category": "property", "price": 8000000, "emoji": "🏙️", "description": "空中别墅", "stock": -1 },
+
+    { "id": "entertain-1", "name": "电影票", "category": "entertain", "price": 15, "emoji": "🎬", "description": "IMAX巨幕", "stock": -1 },
+    { "id": "entertain-2", "name": "KTV包房(3小时)", "category": "entertain", "price": 50, "emoji": "🎤", "description": "尽情高歌", "stock": -1 },
+    { "id": "entertain-3", "name": "密室逃脱", "category": "entertain", "price": 40, "emoji": "🔐", "description": "烧脑解谜", "stock": -1 },
+    { "id": "entertain-4", "name": "演唱会门票", "category": "entertain", "price": 200, "emoji": "🎵", "description": "前排摇滚区", "stock": -1 },
+    { "id": "entertain-5", "name": "游乐场一日票", "category": "entertain", "price": 120, "emoji": "🎢", "description": "刺激一整天", "stock": -1 },
+
+    { "id": "gift-1", "name": "鲜花一束", "category": "gift", "price": 30, "emoji": "💐", "description": "送给心爱的人", "stock": -1 },
+    { "id": "gift-2", "name": "巧克力礼盒", "category": "gift", "price": 45, "emoji": "🍫", "description": "甜蜜心意", "stock": -1 },
+    { "id": "gift-3", "name": "请全班喝奶茶", "category": "gift", "price": 200, "emoji": "🧋", "description": "50人份", "stock": -1 },
+    { "id": "gift-4", "name": "请全公司吃火锅", "category": "gift", "price": 3000, "emoji": "🍲", "description": "200人团建", "stock": -1 },
+    { "id": "gift-5", "name": "给全城发红包(1万份)", "category": "gift", "price": 100000, "emoji": "🧧", "description": "每人10块图个乐", "stock": -1 },
+
+    { "id": "travel-1", "name": "高铁票(单程)", "category": "travel", "price": 80, "emoji": "🚄", "description": "快速准点", "stock": -1 },
+    { "id": "travel-2", "name": "经济舱机票", "category": "travel", "price": 400, "emoji": "✈️", "description": "国内往返", "stock": -1 },
+    { "id": "travel-3", "name": "五星酒店一晚", "category": "travel", "price": 300, "emoji": "🏨", "description": "尊享体验", "stock": -1 },
+    { "id": "travel-4", "name": "邮轮七日游", "category": "travel", "price": 3000, "emoji": "🚢", "description": "吃喝玩乐全包", "stock": -1 },
+    { "id": "travel-5", "name": "环游世界半年", "category": "travel", "price": 100000, "emoji": "🌍", "description": "30国深度体验", "stock": -1 },
+    { "id": "travel-6", "name": "南极探险之旅", "category": "travel", "price": 15000, "emoji": "🐧", "description": "一生一次的体验", "stock": -1 },
+
+    { "id": "invest-1", "name": "买100股苹果", "category": "invest", "price": 18000, "emoji": "🍎", "description": "价值投资", "stock": -1 },
+    { "id": "invest-2", "name": "买一枚比特币", "category": "invest", "price": 65000, "emoji": "₿", "description": "数字黄金", "stock": -1 },
+    { "id": "invest-3", "name": "开一家奶茶店", "category": "invest", "price": 50000, "emoji": "🧋", "description": "当个小老板", "stock": -1 },
+    { "id": "invest-4", "name": "天使投资初创公司", "category": "invest", "price": 500000, "emoji": "🚀", "description": "万一投中独角兽", "stock": -1 },
+    { "id": "invest-5", "name": "买下一座小岛", "category": "invest", "price": 5000000, "emoji": "🏝️", "description": "当岛主", "stock": -1 },
+
+    { "id": "absurd-1", "name": "买1000个盲盒", "category": "absurd", "price": 5000, "emoji": "🎁", "description": "开到隐藏款算我输", "stock": -1 },
+    { "id": "absurd-2", "name": "在时代广场包广告牌(1天)", "category": "absurd", "price": 20000, "emoji": "📺", "description": "向全世界say hi", "stock": -1 },
+    { "id": "absurd-3", "name": "雇一队保镖陪逛超市", "category": "absurd", "price": 5000, "emoji": "🕴️", "description": "排面拉满", "stock": -1 },
+    { "id": "absurd-4", "name": "买一辆冰淇淋车", "category": "absurd", "price": 30000, "emoji": "🍦", "description": "走到哪吃到哪", "stock": -1 },
+    { "id": "absurd-5", "name": "给爱犬买钻石项圈", "category": "absurd", "price": 50000, "emoji": "💎", "description": "狗生巅峰", "stock": -1 },
+    { "id": "absurd-6", "name": "买断一个月的Netflix首页推荐", "category": "absurd", "price": 500000, "emoji": "📺", "description": "推荐一只猫的视频", "stock": -1 }
+  ]
+}
