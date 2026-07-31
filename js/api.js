@@ -6,6 +6,9 @@ const MIN_NET_WORTH_CNY = 2000000000000;  // 2万亿
 const MAX_NET_WORTH_CNY = 4000000000000;  // 4万亿
 const EXCHANGE_RATE = 7.2;
 
+// 会话内（路由切换）保持身价一致；用模块内存变量替代 sessionStorage
+let _sessionNetWorth = null;
+
 function generateRandomNetWorth() {
   const cny = MIN_NET_WORTH_CNY + Math.random() * (MAX_NET_WORTH_CNY - MIN_NET_WORTH_CNY);
   return Math.round(cny / EXCHANGE_RATE);
@@ -13,16 +16,15 @@ function generateRandomNetWorth() {
 
 export function initNetWorth() {
   const store = getStore();
-  const existing = sessionStorage.getItem('musk_session_networth');
 
-  if (existing) {
+  if (_sessionNetWorth != null) {
     // 会话内（路由切换），使用已有值
-    return parseInt(existing, 10);
+    return _sessionNetWorth;
   }
 
   // 新会话（刷新或首次进入），生成新的随机身价
   const newNetWorth = generateRandomNetWorth();
-  sessionStorage.setItem('musk_session_networth', String(newNetWorth));
+  _sessionNetWorth = newNetWorth;
 
   // 更新商店数据：余额 = 新身价 - 已花费
   store.balance = Math.max(0, newNetWorth - store.totalSpent);
@@ -33,8 +35,7 @@ export function initNetWorth() {
 }
 
 export function getDisplayNetWorth() {
-  const existing = sessionStorage.getItem('musk_session_networth');
-  if (existing) return parseInt(existing, 10);
+  if (_sessionNetWorth != null) return _sessionNetWorth;
 
   // 降级
   const store = getStore();
