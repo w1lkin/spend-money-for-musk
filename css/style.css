@@ -86,6 +86,10 @@ body {
 .nav-item.active { color: #7a6e5d; font-weight: 600; }
 
 .nav-icon { font-size: 20px; line-height: 1; }
+
+.gp-home-btn { position: fixed; top: 12px; right: 12px; z-index: 50;
+  font-size: 18px; text-decoration: none; opacity: 0.35; transition: opacity 0.15s; }
+.gp-home-btn:active { opacity: 0.7; }
 .nav-label { font-size: 12px; }
 
 .nav-icon-wrapper {
