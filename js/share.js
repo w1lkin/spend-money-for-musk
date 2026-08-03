@@ -5,7 +5,7 @@ import { formatCurrency, showToast } from './utils.js';
 import { getAllAchievements, getUnlockedTitles, getCategorySpending, renderSettlementHistory } from './achievements.js';
 import { navigate } from './router.js';
 
-const SHARE_URL = 'https://spend-money-for-musk.w1lkin.site/';
+const SHARE_URL = 'https://spend-money-for-musk.pages.dev/';
 
 /**
  * 成就页面
