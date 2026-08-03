@@ -1,4 +1,4 @@
-// 数据存储模块 - localStorage 封装
+// 数据存储模块 - 云端 KV 封装（原 localStorage 已移除）
 // 所有金额以美元内部存储
 // totalSpent / purchasedItems 为「本次选购」数据，结算后重置
 // lifetimeSpent / lifetimeItems 为「累计」数据，结算后累加不重置
@@ -37,64 +37,56 @@ function randomNickname() {
   return NICKNAMES[Math.floor(Math.random() * NICKNAMES.length)];
 }
 
+// 内存缓存：登录门通过后从云端 hydrate 一次；之后所有读写走内存，写操作 debounce 同步到云端
+let _cache = null;
+let _cloudHydrated = false;
+let _saveTimer = null;
+
+function defaultStore() {
+  return {
+    ...STORE_DEFAULTS,
+    nickname: randomNickname(),
+    gameStartTime: Date.now(),
+    purchasedItems: [],
+    cart: [],
+    lifetimeItems: [],
+    unlockedAchievements: [],
+    unlockedTitles: [],
+    settlementHistory: [],
+  };
+}
+
+// 登录后调用一次，从云端拉取存档填入内存缓存
+export async function hydrateStoreFromCloud() {
+  if (_cloudHydrated) return getStore();
+  try {
+    const remote = await window.GamePlatform.getKV(STORAGE_KEY);
+    if (remote && typeof remote === 'object') {
+      _cache = { ...STORE_DEFAULTS, ...remote };
+    }
+  } catch (e) { console.warn('hydrate store failed:', e); }
+  _cloudHydrated = true;
+  return getStore();
+}
+
 /**
- * 读取存储数据，自动迁移旧版本数据
+ * 读取存储数据（内存缓存；未 hydrate 时用默认值）
  */
 export function getStore() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) {
-      const defaults = {
-        ...STORE_DEFAULTS,
-        nickname: randomNickname(),
-        gameStartTime: Date.now(),
-        purchasedItems: [],
-        cart: [],
-        lifetimeItems: [],
-        unlockedAchievements: [],
-        unlockedTitles: [],
-        settlementHistory: []
-      };
-      saveStore(defaults);
-      return defaults;
-    }
-    const data = JSON.parse(raw);
-
-    // 迁移：旧版本没有 lifetime 字段时，把旧数据转为累计数据，清空当前选购
-    if (data.lifetimeSpent === undefined) {
-      data.lifetimeSpent = (data.totalSpent && data.totalSpent > 0) ? data.totalSpent : 0;
-      data.totalSpent = 0;
-      data.purchasedItems = [];
-    }
-    if (data.lifetimeItems === undefined) {
-      if (data.purchasedItems && data.purchasedItems.length > 0) {
-        data.lifetimeItems = JSON.parse(JSON.stringify(data.purchasedItems));
-        data.purchasedItems = [];
-      } else {
-        data.lifetimeItems = [];
-      }
-    }
-
-    return {
-      ...STORE_DEFAULTS,
-      ...data,
-      gameStartTime: data.gameStartTime || Date.now(),
-      lifetimeSpent: data.lifetimeSpent || 0,
-      lifetimeItems: data.lifetimeItems || [],
-      settlementHistory: data.settlementHistory || []
-    };
-  } catch (e) {
-    console.error('Failed to read store:', e);
-    return { ...STORE_DEFAULTS, nickname: randomNickname(), gameStartTime: Date.now() };
-  }
+  if (_cache) return _cache;
+  _cache = defaultStore();
+  return _cache;
 }
 
 export function saveStore(store) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
-  } catch (e) {
-    console.error('Failed to save store:', e);
-  }
+  _cache = store;
+  // debounce 写云端，避免每次操作都发请求
+  if (_saveTimer) clearTimeout(_saveTimer);
+  _saveTimer = setTimeout(() => {
+    try {
+      window.GamePlatform.setKV(STORAGE_KEY, store);
+    } catch (e) { console.error('Failed to save store to cloud:', e); }
+  }, 800);
 }
 
 // ===== 本次选购操作（商品卡片加减） =====
@@ -227,6 +219,13 @@ export function checkoutSettlement(store, netWorth, title) {
   store.lastCheckout = Date.now();
 
   saveStore(store);
+
+  // 战绩上报云端：score = 累计成就数（越大越好）
+  try {
+    window.GamePlatform.submitScore('spend-money-for-musk', (store.lifetimeItems || []).length, {
+      balance: store.balance, lifetimeSpent: store.lifetimeSpent,
+    });
+  } catch (e) { console.warn('submit score failed:', e); }
 
   return snapshot;
 }
