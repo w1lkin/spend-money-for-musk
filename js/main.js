@@ -10,8 +10,6 @@ async function initApp() {
   // 硬登录门：未登录不能玩
   window.GamePlatform.init();
   await window.GamePlatform.mountGate({ gameId: 'spend-money-for-musk' });
-  window.GamePlatform.mountBar(document.getElementById('gp-bar'), { gameId: 'spend-money-for-musk' });
-  window.GamePlatform.mountLeaderboard(document.getElementById('gp-leaderboard'), { gameId: 'spend-money-for-musk' });
 
   // 登录后从云端恢复存档
   await hydrateStoreFromCloud();
