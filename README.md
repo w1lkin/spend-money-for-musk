@@ -36,7 +36,3 @@ spend-money-for-musk/
 
 已部署至 Cloudflare Pages：`spend-money-for-musk.pages.dev`
 
-## 版本
-
-- **v1.0.0** — 初始发布：消费模拟、数据驱动商品、分享卡片
-- **v2.0.0** — 完善项目文档（AGENTS.md / README.md）
