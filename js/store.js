@@ -56,15 +56,22 @@ function defaultStore() {
   };
 }
 
-// 登录后调用一次，从云端拉取存档填入内存缓存
+// 登录后调用一次，从云端拉取存档填入内存缓存；云端不可用时回退本地缓存
 export async function hydrateStoreFromCloud() {
   if (_cloudHydrated) return getStore();
+  let remote = null;
   try {
-    const remote = await window.GamePlatform.getKV(STORAGE_KEY);
-    if (remote && typeof remote === 'object') {
-      _cache = { ...STORE_DEFAULTS, ...remote };
-    }
-  } catch (e) { console.warn('hydrate store failed:', e); }
+    remote = await window.GamePlatform.getKV(STORAGE_KEY);
+  } catch (e) { console.warn('hydrate store from cloud failed:', e); }
+  // 云端没有数据时，回退到本地 localStorage（离线/未登录兜底）
+  if (!remote || typeof remote !== 'object') {
+    remote = window.GamePlatform.localCache.get(STORAGE_KEY);
+  } else {
+    window.GamePlatform.localCache.set(STORAGE_KEY, remote); // 云端优先，回写本地保持一致
+  }
+  if (remote && typeof remote === 'object') {
+    _cache = { ...STORE_DEFAULTS, ...remote };
+  }
   _cloudHydrated = true;
   return getStore();
 }
@@ -80,6 +87,8 @@ export function getStore() {
 
 export function saveStore(store) {
   _cache = store;
+  // 本地即时兜底：无论是否登录/在线，先写 localStorage
+  window.GamePlatform.localCache.set(STORAGE_KEY, store);
   // debounce 写云端，避免每次操作都发请求
   if (_saveTimer) clearTimeout(_saveTimer);
   _saveTimer = setTimeout(() => {
